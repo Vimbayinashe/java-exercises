@@ -1,5 +1,7 @@
 package com.company.arrays;
 
+import java.util.Scanner;
+
 public class PracticeArrays {
     public static void main(String[] args) {
 //        One();
@@ -10,13 +12,35 @@ public class PracticeArrays {
 
     //4 Skriv ett program som frågar användaren efter ett tal. Programmet ska skapa en ny array som är så lång och fylla den med slumptal (se uppgift 3) av datatypen int. Skriv ut alla talen och vad de har för medelvärde som en double.
     static void Four() {
-        System.out.println();
+        System.out.println("Please enter a number");
+        Scanner scanner = new Scanner(System.in);
+
+        int length = scanner.nextInt();
+        int[] newArray = new int[length];
+        int sum = 0;
+
+        System.out.println("Values in the new array");
+
+        for (int i = 0; i < length; i++) {
+            int random = (int) (Math.random() * 20 + 1);
+            newArray[i] = random;
+            sum += random;
+            System.out.println(newArray[i]);
+        }
+
+        System.out.println("Sum of all values: " + sum);
+
+        double average = (double) sum / length;
+
+        System.out.print("Average of all values: ");
+        System.out.printf("%.2f", average);
+
     }
 
     //    3 Skriv ett program som skapar en array med fem heltal, som ska slumpas fram. Programmet ska sedan gå igenom arrayen och skriva ut vilket det största och minsta talet är samt hur många tal som är udda.
     static void Three() {
 
-         //slumpad array
+        //slumpad array
         int[] randomNumbers = new int[5];
 
         for (int i = 0; i < 5; i++) {
