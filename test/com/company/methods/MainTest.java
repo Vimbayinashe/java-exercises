@@ -26,4 +26,16 @@ class MainTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    void inputNameCityAndFavouriteNumberShouldOutputAGreeting () {
+        String name = "Vimbayi";
+        String city = "Göteborg";
+        int number = 5;
+
+        String actual = Main.greeting(name, city, number);
+        String expected = "Välkommen " + name + " från " + city + " med favorittal " + number;
+
+        assertEquals(expected, actual);
+    }
 }
