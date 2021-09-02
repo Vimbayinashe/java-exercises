@@ -45,4 +45,10 @@ class MainTest {
         assertEquals(12, Main.convertStringToInteger("12"));
         assertEquals(0, Main.convertStringToInteger("2b"));
     }
+
+    @Test
+    void returnAStringInAnHTMLParagraphTag() {
+        assertEquals("<p>Hello World</p>", Main.convertStringToHTML("Hello World"));
+    }
+
 }

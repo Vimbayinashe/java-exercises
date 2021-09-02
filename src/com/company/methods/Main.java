@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
 
     }
-    
+
     public static double add(double a, double b) {
         return a + b;
     }
@@ -20,20 +20,17 @@ public class Main {
         for (int value : array) {
             result = result * value;
         }
-        
+
         return result;
     }
 
     public static String greeting(String name, String city, byte number) {
-        return  "Välkommen " + name + " från " + city + " med favorittal " + number;
+        return "Välkommen " + name + " från " + city + " med favorittal " + number;
     }
-
-//    Skriv en funktion som tar en parameter av datatypen string och returnerar ett tal av datatypen int.
-//    Om det inte går att göra om parametern till ett tal ska funktionen kasta ett Exception.
 
     public static int convertStringToInteger(String input) {
         int output;
-        
+
         try {
             output = Integer.parseInt(input);
         } catch (NumberFormatException ignored) {
@@ -42,6 +39,12 @@ public class Main {
         }
 
         return output;
+    }
+
+    //    Skriv en funktion med namnet paragraph, som tar en parameter.
+//    Den ska returnera en sträng enligt det här exemplet: paragraph("hej") → "<p>hej</p>"
+    public static String convertStringToHTML(String input) {
+        return "<p>" + input + "</p>";
     }
 
 }
