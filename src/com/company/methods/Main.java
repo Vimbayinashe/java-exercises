@@ -11,6 +11,10 @@ public class Main {
     public static double add(double a, double b) {
         return a + b;
     }
+
+    public static int multiplyThree(int num1, int num2, int num3) {
+        return num1 * num2 / num3;
+    }
 }
 
 
