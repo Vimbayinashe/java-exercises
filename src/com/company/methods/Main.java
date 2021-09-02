@@ -91,6 +91,25 @@ public class Main {
         return input.substring(0, 3);
     }
 
+    public static String year(String date) {
+        return date.substring(0, 4);
+//        return date.substring(0, date.indexOf('-'));
+    }
+
+    //    Skriv en funktion med namnet daysBetween som räknar ut hur många dagar det är mellan två datum.
+//Exempel: daysBetween(“2017-08-30”, “2017-09-02”) == 4 Tips: Använd javas färdiga klasser för att hantera datum.
+    public static int daysBetween(String date1, String date2) {
+        //TODO
+
+        return 1;
+    }
+
+    //    10 Skriv en funktion som översätter en temperatur i Fahrenheit till Celsius.
+//    Den ska ta en parameter och returnera ett värde. Välj lämpliga datatyper.
+    public static String convertTemperature(double temp) {
+        return  String.format("%.1f", (temp - 32) * 5 / 9);
+    }
+
 }
 
 

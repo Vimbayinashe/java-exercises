@@ -61,4 +61,19 @@ class MainTest {
         assertEquals("bee", Main.firstThreeCharacters("beeswax"));
     }
 
+    @Test
+    void functionYearReturnsYearFromDateInput() {
+        assertEquals("2022", Main.year("2022-12-31"));
+    }
+
+    @Test
+    void daysBetweenReturnsNumberOfDaysBetweenTwoDates () {
+        assertEquals(18, Main.daysBetween("2021-08-30", "2021-09-17"));
+    }
+
+    @Test
+    void convertTemperatureConvertsFarenheitToCelsius() {
+        assertEquals("37.8", Main.convertTemperature(100.0));
+    }
+
 }
