@@ -56,4 +56,9 @@ class MainTest {
         assertEquals(31, Main.daysInAMonth(Main.Month.JAN));
     }
 
+    @Test
+    void returnFirstThreeCharactersInAStringInput() {
+        assertEquals("bee", Main.firstThreeCharacters("beeswax"));
+    }
+
 }

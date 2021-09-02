@@ -45,7 +45,6 @@ public class Main {
         return "<p>" + input + "</p>";
     }
 
-//    6 Skapa en enum Month som består av namn på månaderna.
     enum Month {
         JAN,
         FEB,
@@ -86,6 +85,10 @@ public class Main {
 
         }
         return days;
+    }
+
+    public static String firstThreeCharacters(String input) {
+        return input.substring(0, 3);
     }
 
 }
