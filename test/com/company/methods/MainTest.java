@@ -51,4 +51,9 @@ class MainTest {
         assertEquals("<p>Hello World</p>", Main.convertStringToHTML("Hello World"));
     }
 
+    @Test
+    void daysInAMonthShouldReturnNumberOfDaysInAMonth() {
+        assertEquals(31, Main.daysInAMonth(Main.Month.JAN));
+    }
+
 }

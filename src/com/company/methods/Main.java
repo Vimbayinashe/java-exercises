@@ -41,10 +41,51 @@ public class Main {
         return output;
     }
 
-    //    Skriv en funktion med namnet paragraph, som tar en parameter.
-//    Den ska returnera en sträng enligt det här exemplet: paragraph("hej") → "<p>hej</p>"
     public static String convertStringToHTML(String input) {
         return "<p>" + input + "</p>";
+    }
+
+//    6 Skapa en enum Month som består av namn på månaderna.
+    enum Month {
+        JAN,
+        FEB,
+        MAR,
+        APR,
+        MAY,
+        JUN,
+        JUL,
+        AUG,
+        SEP,
+        OCT,
+        NOV,
+        DEC
+    }
+
+    public static int daysInAMonth(Month month) {
+        int days = 0;
+
+        switch (month) {
+            case JAN:
+            case MAR:
+            case MAY:
+            case JUL:
+            case AUG:
+            case OCT:
+            case DEC:
+                days = 31;
+                break;
+            case APR:
+            case JUN:
+            case SEP:
+            case NOV:
+                days = 30;
+                break;
+            case FEB:
+                days = 28;
+                break;
+
+        }
+        return days;
     }
 
 }
