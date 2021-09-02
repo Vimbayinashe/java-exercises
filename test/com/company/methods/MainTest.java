@@ -31,11 +31,18 @@ class MainTest {
     void inputNameCityAndFavouriteNumberShouldOutputAGreeting () {
         String name = "Vimbayi";
         String city = "Göteborg";
-        int number = 5;
+        byte number = 5;
 
         String actual = Main.greeting(name, city, number);
         String expected = "Välkommen " + name + " från " + city + " med favorittal " + number;
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void convertStringToIntegerAndThrowAnExceptionIfNotPossible() {
+
+        assertEquals(12, Main.convertStringToInteger("12"));
+        assertEquals(0, Main.convertStringToInteger("2b"));
     }
 }

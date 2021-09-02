@@ -24,11 +24,24 @@ public class Main {
         return result;
     }
 
-//    Skriv en funktion som tar tre parametrar: name, city och favoriteNumber.
-//    Talet ska ha datatypen byte och de andra ska vara string.
-//    Funktionen ska skriva ut informationen till konsolen i en fullständig mening. Exempel "Välkommen Namn från Göteborg med favorittal 12".
-    public static String greeting(String name, String city, int number) {
+    public static String greeting(String name, String city, byte number) {
         return  "Välkommen " + name + " från " + city + " med favorittal " + number;
+    }
+
+//    Skriv en funktion som tar en parameter av datatypen string och returnerar ett tal av datatypen int.
+//    Om det inte går att göra om parametern till ett tal ska funktionen kasta ett Exception.
+
+    public static int convertStringToInteger(String input) {
+        int output;
+        
+        try {
+            output = Integer.parseInt(input);
+        } catch (NumberFormatException ignored) {
+            System.out.println("Invalid input in convertStringToInteger function.");
+            output = 0;
+        }
+
+        return output;
     }
 
 }
