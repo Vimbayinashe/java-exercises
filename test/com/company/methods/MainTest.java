@@ -76,4 +76,14 @@ class MainTest {
         assertEquals("37.8", Main.convertTemperature(100.0));
     }
 
+    @Test
+    void sumOfNumbersReturnSumOfFirstOneHundredNumbers() {
+        assertEquals(5050, Main.sumOfNumbers());
+    }
+
+    @Test
+    void sumOfNumbersReturnSumOfParametersValue() {
+        assertEquals(15, Main.sumOfNumbers(5));
+    }
+
 }

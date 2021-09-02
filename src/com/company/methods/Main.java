@@ -104,10 +104,37 @@ public class Main {
         return 1;
     }
 
-    //    10 Skriv en funktion som översätter en temperatur i Fahrenheit till Celsius.
-//    Den ska ta en parameter och returnera ett värde. Välj lämpliga datatyper.
     public static String convertTemperature(double temp) {
         return  String.format("%.1f", (temp - 32) * 5 / 9);
+    }
+
+//    Förbättra sedan funktionen så att den tar en parameter,
+//    som är hur många tal som ska läggas ihop.
+
+    public static int sumOfNumbers() {
+        int count = 1;
+        int sum = 0;
+
+        while (count <= 100) {
+            sum += count;
+            ++count;
+        }
+
+        return sum;
+
+    }
+
+    public static int sumOfNumbers(int limit) {
+        int count = 1;
+        int sum = 0;
+
+        while (count <= limit) {
+            sum += count;
+            ++count;
+        }
+
+        return sum;
+
     }
 
 }
