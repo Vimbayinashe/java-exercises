@@ -108,8 +108,6 @@ public class Main {
         return  String.format("%.1f", (temp - 32) * 5 / 9);
     }
 
-//    Förbättra sedan funktionen så att den tar en parameter,
-//    som är hur många tal som ska läggas ihop.
 
     public static int sumOfNumbers() {
         int count = 1;
@@ -135,6 +133,21 @@ public class Main {
 
         return sum;
 
+    }
+
+//    12 Skriv en funktion som tar en sträng som parameter och returnerar strängen baklänges.
+//    Använd en loop.
+
+    public static String reverse(String input) {
+        int length = input.length();
+        String reversedWord = "";
+
+        for (int i = length -1; i >=0; i--) {
+            reversedWord += input.charAt(i);
+        }
+
+
+        return reversedWord;
     }
 
 }

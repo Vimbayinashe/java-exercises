@@ -86,4 +86,10 @@ class MainTest {
         assertEquals(15, Main.sumOfNumbers(5));
     }
 
+    @Test
+    void reverseReversesAString() {
+        StringBuilder reversedWord = new StringBuilder("maet");
+        assertEquals("maet", Main.reverse("team"));
+    }
+
 }
