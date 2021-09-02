@@ -104,8 +104,9 @@ public class Main {
         return 1;
     }
 
-    public static String convertTemperature(double temp) {
+    public static String  convertTemperature(double temp) {
         return  String.format("%.1f", (temp - 32) * 5 / 9);
+//        return  Math.round(100.0 * (temp - 32) * 5 / 9)/ 100.0;
     }
 
 
@@ -135,19 +136,42 @@ public class Main {
 
     }
 
-//    12 Skriv en funktion som tar en sträng som parameter och returnerar strängen baklänges.
-//    Använd en loop.
-
     public static String reverse(String input) {
         int length = input.length();
-        String reversedWord = "";
+        StringBuilder reversedWord = new StringBuilder();
 
         for (int i = length -1; i >=0; i--) {
-            reversedWord += input.charAt(i);
+            reversedWord.append(input.charAt(i));
+//             reversedWord += input.charAt(i);
+                // satisfies test but -> warning in IDE. Stringbuilder is a complex datatype
         }
 
 
-        return reversedWord;
+        return reversedWord.toString();
+    }
+
+//    14 Skriv en funktion som beräknar medelvärdet av parametrarna som skickas in.
+//    Gör flera versioner (överlagring, overloading) av metoden som tar olika antal
+//    parametrar men har samma funktionsnamn. Vi vill kunna hantera 2,3,4,5…
+
+    public static double average(int first, int second) {
+        double average = (first + second) / 2.0;
+        return (Math.round(average * 100) / 100.00);
+    }
+
+    public static double average(int first, int second, int third) {
+        double average = (first + second +third) / 3.0;
+        return (Math.round(average * 100) / 100.00);
+    }
+
+    public static double average(int[] numbers) {
+        int sum = 0;
+
+        for (int number: numbers) {
+            sum += number;
+        }
+        double average = (double) sum / numbers.length;
+        return (Math.round(average * 100) / 100.00);
     }
 
 }

@@ -88,8 +88,12 @@ class MainTest {
 
     @Test
     void reverseReversesAString() {
-        StringBuilder reversedWord = new StringBuilder("maet");
         assertEquals("maet", Main.reverse("team"));
+    }
+
+    @Test
+    void averageReturnsAverageOfTwoNumbers () {
+        assertEquals(7.5, Main.average(7, 8));
     }
 
 }
