@@ -5,19 +5,25 @@ import java.util.Scanner;
 public class PracticeArrays {
     public static void main(String[] args) {
 //        One();
-//        Two();
+        Two();
 //        Three();
-        Four();
+//        Four();
     }
 
-    //4 Skriv ett program som frågar användaren efter ett tal. Programmet ska skapa en ny array som är så lång och fylla den med slumptal (se uppgift 3) av datatypen int. Skriv ut alla talen och vad de har för medelvärde som en double.
+    //4 Skriv ett program som frågar användaren efter ett tal.
+    // Programmet ska skapa en ny array som är så lång och fylla den med slumptal (se uppgift 3) av datatypen int.
+    // Skriv ut alla talen och vad de har för medelvärde som en double.
     static void Four() {
         System.out.println("Please enter a number");
         Scanner scanner = new Scanner(System.in);
 
-        int length = scanner.nextInt();
+        final int length = scanner.nextInt();   //variable's value should not be changed
         int[] newArray = new int[length];
         int sum = 0;
+//        double sum = 0;   //you can also just declare sum as a double from the beginning
+
+//        Random random = new Random();
+//        int value = random.nextInt();     //random.nextInt(100); -> limit to 0-100
 
         System.out.println("Values in the new array");
 
@@ -31,13 +37,15 @@ public class PracticeArrays {
         System.out.println("Sum of all values: " + sum);
 
         double average = (double) sum / length;
+//        double average = sum * 1.0 / length;    //teacher prefers this than the method above
 
-        System.out.print("Average of all values: ");
-        System.out.printf("%.2f", average);
+        System.out.printf("Average of all values: %.2f", average);
+        System.out.printf("Average of all values: %.2f och en gång till %.2f", average, average);
 
     }
 
-    //    3 Skriv ett program som skapar en array med fem heltal, som ska slumpas fram. Programmet ska sedan gå igenom arrayen och skriva ut vilket det största och minsta talet är samt hur många tal som är udda.
+    //    3 Skriv ett program som skapar en array med fem heltal, som ska slumpas fram.
+    //    Programmet ska sedan gå igenom arrayen och skriva ut vilket det största och minsta talet är samt hur många tal som är udda.
     static void Three() {
 
         //slumpad array
@@ -49,12 +57,13 @@ public class PracticeArrays {
             System.out.println(randomNumbers[i]);
         }
 
+
         int least = randomNumbers[0];
         int greatest = randomNumbers[0];
         int count = 0;
 
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 1; i < 5; i++) {
             if (randomNumbers[i] < least)
                 least = randomNumbers[i];
             if (randomNumbers[i] > greatest)
@@ -66,6 +75,12 @@ public class PracticeArrays {
         System.out.println("Minimum value: " + least);
         System.out.println("Maximum value: " + greatest);
         System.out.println("Count " + count);
+
+//        Alt:
+//        Random random = new Random();
+//        int rand = random.nextInt();
+//        int least = Integer.MAX_VALUE;  //works also
+//        int greatest = Integer.MIN_VALUE;
 
     }
 
@@ -90,5 +105,16 @@ public class PracticeArrays {
         }
 
         System.out.println("Sum of array is: " + sum);
+
+        int challenge = 0;
+
+        for (int i = 0; i < numbers.length; i++) {
+            if(i%2 == 0)
+                challenge += numbers[i];
+            else
+                challenge -= numbers[i];
+        }
+
+        System.out.println("Result of challenge is: " + challenge);
     }
 }
