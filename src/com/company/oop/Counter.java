@@ -4,6 +4,17 @@ public class Counter {
     private int counter;    //initialises to 0 if nothing is assigned;
     private String name;    //default value of null -> complex datatypes
 
+    private static int counterObjects;
+
+    public Counter() {
+        counterObjects++;      //count number of Counter objects that have been created (static variable)
+    }
+
+//    Alt 2: a constructor for static variables - static initialisation block
+//    static {
+//        counterObjects ++;
+//    }
+
     public void increase() {
         counter++;
     }
@@ -16,6 +27,10 @@ public class Counter {
         return counter;
     }
 
+    public void printCounterObjects() {
+        System.out.println(counterObjects);
+    }
+
     public static void main(String[] args) {
         Counter counter = new Counter();
 
@@ -23,5 +38,20 @@ public class Counter {
         counter.increase();
 
         System.out.println(counter.value());
+
+        counter.printCounterObjects();
     }
+
+
+    //Using this Counter object to be a counter => works for non-static variables
+//    private static Counter numberOfObjects;
+//
+//    static {
+//        numberOfObjects = new Counter(null);
+//    }
+//
+//    // private constructor to initialise Counter so we can use our Counter object as a counter
+//    private Counter(Object object) {
+//
+//    }
 }
