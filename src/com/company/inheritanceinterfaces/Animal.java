@@ -1,8 +1,6 @@
 package com.company.inheritanceinterfaces;
 
-//2 Skapa två publika metoder i superklassen från förra uppgiften. Metoderna ska skriva ut något så att man ser att de körs.
-// Lägg till en av metoderna i subklassen. Skapa ett objekt av subklassen och testa vad som händer när du anropar båda funktionerna från superklassen.
-public class Animal {
+abstract public class Animal {
     private String color;
 
     public Animal() {
@@ -33,7 +31,7 @@ public class Animal {
     }
 
     public static void main(String[] args) {
-        Animal animal = new Animal("pink");
+        Animal animal = new Fish("orange", true);
         animal.diet();
         animal.wild();
 

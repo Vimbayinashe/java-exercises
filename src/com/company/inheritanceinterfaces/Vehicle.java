@@ -1,6 +1,6 @@
 package com.company.inheritanceinterfaces;
 
-public class Vehicle {
+abstract public class Vehicle {
     String color;
 
     public Vehicle() {}
