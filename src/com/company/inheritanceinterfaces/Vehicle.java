@@ -71,11 +71,18 @@ class Sail extends Boat {
 }
 
 class Bicycle extends Vehicle {
+    int numberOfWheels;
+
     public Bicycle() {
     }
 
     public Bicycle(String color) {
         super(color);
+    }
+
+    public Bicycle(String color, int numberOfWheels) {
+        super(color);
+        this.numberOfWheels = numberOfWheels;
     }
 
     @Override
