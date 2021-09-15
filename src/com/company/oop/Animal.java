@@ -10,6 +10,9 @@ public class Animal {
 
     }
 
+    public Animal() {
+    }
+
     public static void main(String[] args) {
 
         //an elephant can be 4 different type of objects
@@ -51,10 +54,11 @@ class Fish extends Animal {
         return super.test();
     }
 
-//    @Override
-//    public void animal() {
-//        super.animal();
-//    }
+    //an overidden method is called even when an object is of it's superclass's type
+    @Override
+    public void animal() {
+        System.out.println("I am an animal and also a fish");
+    }
 }
 
 class Bird extends Animal {
