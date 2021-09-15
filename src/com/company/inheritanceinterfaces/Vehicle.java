@@ -1,6 +1,6 @@
 package com.company.inheritanceinterfaces;
 
-abstract public class Vehicle {
+public class Vehicle {
     String color;
 
     public Vehicle() {}
@@ -101,5 +101,26 @@ class Car extends Vehicle {
     @Override
     public void goTo(String destination) {
         System.out.println("Färdas med bil till " + destination);
+    }
+}
+
+abstract class ElectricVehicle {
+
+    public ElectricVehicle() {
+
+    }
+
+    abstract public String chargingMethod();
+
+}
+
+class ElectricScooter extends ElectricVehicle {
+
+    public ElectricScooter() {
+    }
+
+    @Override
+    public String chargingMethod() {
+        return "electricity";
     }
 }
