@@ -1,9 +1,8 @@
 package com.company.inheritanceinterfaces;
 
+//2 Skapa två publika metoder i superklassen från förra uppgiften. Metoderna ska skriva ut något så att man ser att de körs.
+// Lägg till en av metoderna i subklassen. Skapa ett objekt av subklassen och testa vad som händer när du anropar båda funktionerna från superklassen.
 public class Animal {
-//    Skriv en klass som ärver från en annan klass. Superklassen ska vara något generellt och subklassen något mer
-//    specifikt. Skapa objekt av båda klasserna för att kontrollera att du har gjort rätt.Animals
-
     private String color;
 
     public Animal() {
@@ -14,12 +13,16 @@ public class Animal {
         this.color = color;
     }
 
+    public String color() {
+        return color;
+    }
+
     public void diet() {
         System.out.println("I like eating");
     }
 
-    public String color() {
-        return color;
+    public void wild() {
+        System.out.println("I am a wild animal");
     }
 
     @Override
@@ -31,36 +34,41 @@ public class Animal {
 
     public static void main(String[] args) {
         Animal animal = new Animal("pink");
-        System.out.println(animal);
+        animal.diet();
+        animal.wild();
 
         Fish fish1 = new Fish("orange", false);
         System.out.println(fish1);
+        fish1.diet();
+        fish1.wild();
+
 
         Animal fish2 = new Fish("silver", true);
-        System.out.println(fish2);
+//        System.out.println(fish2);
     }
 
 }
 
 class Fish extends Animal {
 
-    private boolean inFishBowl;
+    private boolean isPet;
 
     public Fish() {
     }
 
-    public Fish(String color, boolean inFishBowl) {
+    public Fish(String color, boolean isPet) {
         super(color);
-        this.inFishBowl = inFishBowl;
+        this.isPet = isPet;
     }
 
     public Fish(Fish fish) {
         super(fish.color());
-        this.inFishBowl = fish.inFishBowl;
+        this.isPet = fish.isPet;
     }
 
     @Override
     public void diet() {
+        super.diet();
         System.out.println("I like eating seaweed!");
     }
 
@@ -73,7 +81,8 @@ class Fish extends Animal {
     @Override
     public String toString() {
         return "Fish{" +
-                "inFishBowl=" + inFishBowl +
+                "isPet=" + isPet +
+                ", color=" + color() +
                 '}';
     }
 }
