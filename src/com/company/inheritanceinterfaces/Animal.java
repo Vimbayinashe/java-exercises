@@ -84,3 +84,8 @@ class Fish extends Animal {
                 '}';
     }
 }
+
+@FunctionalInterface
+interface NoiseMaker {
+    String makeNoise();
+}

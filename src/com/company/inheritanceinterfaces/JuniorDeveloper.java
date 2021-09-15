@@ -43,5 +43,5 @@ public class JuniorDeveloper implements Developer{
     public void java(boolean java){
         this.java = java;
     }
-    
+
 }
