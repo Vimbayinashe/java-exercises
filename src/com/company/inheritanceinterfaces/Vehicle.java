@@ -10,7 +10,7 @@ abstract public class Vehicle {
     }
 
     public void goTo(String destination) {
-        System.out.println("Färdas till" + destination);
+        System.out.println("Färdas till " + destination);
     }
 
     public static void main(String[] args) {
@@ -36,6 +36,11 @@ class Boat extends Vehicle {
     public Boat(String color) {
         super(color);
     }
+
+    @Override
+    public void goTo(String destination) {
+        System.out.println("Färdas med båt till " + destination);
+    }
 }
 
 class Motorboat extends Boat {
@@ -45,6 +50,11 @@ class Motorboat extends Boat {
     public Motorboat(String color) {
         super(color);
     }
+
+    @Override
+    public void goTo(String destination) {
+        System.out.println("Färdas med motorbåt till " + destination);
+    }
 }
 
 class Sail extends Boat {
@@ -52,6 +62,11 @@ class Sail extends Boat {
 
     public Sail(String color) {
         super(color);
+    }
+
+    @Override
+    public void goTo(String destination) {
+        System.out.println("Färdas med segelbåt till " + destination);
     }
 }
 
@@ -62,6 +77,11 @@ class Bicycle extends Vehicle {
     public Bicycle(String color) {
         super(color);
     }
+
+    @Override
+    public void goTo(String destination) {
+        System.out.println("Färdas med cykel till " + destination);
+    }
 }
 
 class Car extends Vehicle {
@@ -69,5 +89,10 @@ class Car extends Vehicle {
 
     public Car(String color) {
         super(color);
+    }
+
+    @Override
+    public void goTo(String destination) {
+        System.out.println("Färdas med bil till " + destination);
     }
 }
