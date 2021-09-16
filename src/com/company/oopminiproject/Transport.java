@@ -61,8 +61,8 @@ class RoadVehicle extends Transport implements Driving {
 
 
 class WaterVessel extends Transport implements GPS {
-    double latitude;
-    double longitude;
+    private double latitude;
+    private double longitude;
     Random random;
 
     public WaterVessel(int weight, int price) {
@@ -89,8 +89,8 @@ class WaterVessel extends Transport implements GPS {
 
 
 class Aircraft extends Transport implements Flying {
-    int altitude;
-    Random random;
+    private int altitude;
+    private final Random random;
 
     public Aircraft(int weight, int price) {
         super(weight, price);
