@@ -60,9 +60,48 @@ class Seller extends Person {
     }
 }
 
-class Owner extends Person {
+class Dealer extends Person {
+    private int rate;   //as a percentage
 
-    public Owner(String name, int age, String occupation, int bankBalance) {
+    public Dealer(String name, int age, String occupation, int bankBalance) {
         super(name, age, occupation, bankBalance);
+        rate = 5;
+    }
+
+    public void sellVehicle(Vehicle vehicle, Person person) {
+        int commission = (vehicle.price() * rate / 100);
+        vehicle.removeOwner();
+        person.deposit(vehicle.price() - commission);
+        deposit(commission);
+    }
+
+
+    public void buyVehicle(Vehicle vehicle, Person person) {
+            person.withdrawal(vehicle.price());
+            vehicle.addOwner(person);
+    }
+
+    public void vehicleTransfer(Person seller, Vehicle vehicle, Person buyer) {
+        if(buyer.bankBalance() > vehicle.price()) {
+            sellVehicle(vehicle, seller);
+            buyVehicle(vehicle, buyer);
+        }
+    }
+
+    public int fee() {
+        return rate;
+    }
+
+    public void fee(int fee) {
+        this.rate = fee;
     }
 }
+
+
+
+
+
+
+
+
+

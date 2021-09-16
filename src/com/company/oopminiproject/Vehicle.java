@@ -2,18 +2,18 @@ package com.company.oopminiproject;
 
 import java.util.Random;
 
-abstract public class Transport {
+abstract public class Vehicle {
     private int weight;
     private int price;
     private Person owner;
 
 
-    public Transport(int weight, int price) {
+    public Vehicle(int weight, int price) {
         this.weight = weight;
         this.price = price;
     }
 
-    public Transport(int weight, int price, Person owner) {
+    public Vehicle(int weight, int price, Person owner) {
         this.weight = weight;
         this.price = price;
         this.owner = owner;
@@ -37,7 +37,7 @@ abstract public class Transport {
 
     @Override
     public String toString() {
-        return "Transport{" +
+        return "Vehicle{" +
                 "weight=" + weight +
                 ", price=" + price +
                 '}';
@@ -54,8 +54,8 @@ abstract public class Transport {
 }
 
 
-// Transport derived classes
-class RoadVehicle extends Transport implements Driving {
+// Vehicle derived classes
+class RoadVehicle extends Vehicle implements Driving {
     private int mileage;
 
 
@@ -86,7 +86,7 @@ class RoadVehicle extends Transport implements Driving {
 }
 
 
-class WaterVessel extends Transport implements GPS {
+class WaterVessel extends Vehicle implements GPS {
     private double latitude;
     private double longitude;
     Random random;
@@ -121,7 +121,7 @@ class WaterVessel extends Transport implements GPS {
 }
 
 
-class Aircraft extends Transport implements Flying {
+class Aircraft extends Vehicle implements Flying {
     private int altitude;
     private final Random random;
 
