@@ -5,11 +5,18 @@ import java.util.Random;
 abstract public class Transport {
     private int weight;
     private int price;
+    private Person owner;
 
 
     public Transport(int weight, int price) {
         this.weight = weight;
         this.price = price;
+    }
+
+    public Transport(int weight, int price, Person owner) {
+        this.weight = weight;
+        this.price = price;
+        this.owner = owner;
     }
 
     public int weight() {
@@ -36,6 +43,14 @@ abstract public class Transport {
                 '}';
     }
 
+    public void removeOwner() {
+        this.owner = null;
+    }
+
+    public void addOwner(Person owner) {    //changeOwner
+        this.owner = owner;
+    }
+
 }
 
 
@@ -49,6 +64,11 @@ class RoadVehicle extends Transport implements Driving {
         this.mileage = mileage;
     }
 
+    public RoadVehicle(int weight, int price, int mileage, Person person) {
+        super(weight, price, person);
+        this.mileage = mileage;
+    }
+
     @Override
     public void drive(int km) {
         mileage += km;
@@ -56,6 +76,12 @@ class RoadVehicle extends Transport implements Driving {
 
     public int mileage() {
         return mileage;
+    }
+
+
+    @Override   //Do I need to override a method with same fxn as super's?
+    public void addOwner(Person owner) {
+        super.addOwner(owner);
     }
 }
 
@@ -74,8 +100,15 @@ class WaterVessel extends Transport implements GPS {
         longitude = 11.9670171;
     }
 
-    public WaterVessel(int weight, int price, double latitude, double longitude) {
-        super(weight, price);
+    public WaterVessel(int weight, int price, Person person) {
+        super(weight, price, person);
+        random = new Random();
+        latitude = 57.7072326;
+        longitude = 11.9670171;
+    }
+
+    public WaterVessel(int weight, int price, Person person, double latitude, double longitude) {
+        super(weight, price, person);
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -94,6 +127,12 @@ class Aircraft extends Transport implements Flying {
 
     public Aircraft(int weight, int price) {
         super(weight, price);
+        altitude = 0;
+        random = new Random();
+    }
+
+    public Aircraft(int weight, int price, Person person) {
+        super(weight, price, person);
         altitude = 0;
         random = new Random();
     }
@@ -118,12 +157,20 @@ class Car extends RoadVehicle {
     public Car(int weight, int price, int mileage) {
         super(weight, price, mileage);
     }
+
+    public Car(int weight, int price, int mileage, Person person) {
+        super(weight, price, mileage, person);
+    }
 }
 
 class Motorcycle extends RoadVehicle {
 
     public Motorcycle(int weight, int price, int mileage) {
         super(weight, price, mileage);
+    }
+
+    public Motorcycle(int weight, int price, int mileage, Person person) {
+        super(weight, price, mileage, person);
     }
 }
 
@@ -133,8 +180,12 @@ class Boat extends WaterVessel {
         super(weight, price);
     }
 
-    public Boat(int weight, int price, double latitude, double longitude) {
-        super(weight, price, latitude, longitude);
+    public Boat(int weight, int price, Person person) {
+        super(weight, price, person);
+    }
+
+    public Boat(int weight, int price, Person person, double latitude, double longitude) {
+        super(weight, price, person, latitude, longitude);
     }
 }
 
@@ -143,11 +194,19 @@ class Airplane extends Aircraft {
     public Airplane(int weight, int price) {
         super(weight, price);
     }
+
+    public Airplane(int weight, int price, Person person) {
+        super(weight, price, person);
+    }
 }
 
 class Helicopter extends Aircraft {
 
     public Helicopter(int weight, int price) {
         super(weight, price);
+    }
+
+    public Helicopter(int weight, int price, Person person) {
+        super(weight, price, person);
     }
 }
