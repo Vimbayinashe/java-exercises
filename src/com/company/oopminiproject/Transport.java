@@ -60,7 +60,6 @@ class RoadVehicle extends Transport implements Driving {
 }
 
 
-
 class WaterVessel extends Transport implements GPS {
     double latitude;
     double longitude;
@@ -88,11 +87,13 @@ class WaterVessel extends Transport implements GPS {
     }
 }
 
-class Aircraft implements Flying {
+
+class Aircraft extends Transport implements Flying {
     int altitude;
     Random random;
 
-    public Aircraft() {
+    public Aircraft(int weight, int price) {
+        super(weight, price);
         altitude = 0;
         random = new Random();
     }
@@ -111,3 +112,42 @@ class Aircraft implements Flying {
 }
 
 
+//Vehicles
+class Car extends RoadVehicle {
+
+    public Car(int weight, int price, int mileage) {
+        super(weight, price, mileage);
+    }
+}
+
+class Motorcycle extends RoadVehicle {
+
+    public Motorcycle(int weight, int price, int mileage) {
+        super(weight, price, mileage);
+    }
+}
+
+class Boat extends WaterVessel {
+
+    public Boat(int weight, int price) {
+        super(weight, price);
+    }
+
+    public Boat(int weight, int price, double latitude, double longitude) {
+        super(weight, price, latitude, longitude);
+    }
+}
+
+class Airplane extends Aircraft {
+
+    public Airplane(int weight, int price) {
+        super(weight, price);
+    }
+}
+
+class Helicopter extends Aircraft {
+
+    public Helicopter(int weight, int price) {
+        super(weight, price);
+    }
+}
