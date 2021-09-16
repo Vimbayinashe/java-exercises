@@ -77,10 +77,13 @@ class Dealer extends Person {
 
 
     public void buyVehicle(Vehicle vehicle, Person person) {
+        if(person.bankBalance() > vehicle.price()) {    //check for sufficient balance here?
             person.withdrawal(vehicle.price());
             vehicle.addOwner(person);
+        }
     }
 
+    //todo: is this method necessary?
     public void vehicleTransfer(Person seller, Vehicle vehicle, Person buyer) {
         if(buyer.bankBalance() > vehicle.price()) {
             sellVehicle(vehicle, seller);
