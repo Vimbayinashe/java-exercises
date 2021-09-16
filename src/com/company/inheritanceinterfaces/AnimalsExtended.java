@@ -34,5 +34,5 @@ class Robot implements NoiseMaker {
     public String makeNoise() {
         return "whirring";
     }
-    
+
 }
