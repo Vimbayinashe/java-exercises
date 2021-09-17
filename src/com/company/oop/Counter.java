@@ -4,10 +4,10 @@ public class Counter {
     private int counter;    //initialises to 0 if nothing is assigned;
     private String name;    //default value of null -> complex datatypes
 
-    private static int counterObjects;
+    private static int noOfObjects;
 
     public Counter() {
-        counterObjects++;      //count number of Counter objects that have been created (static variable)
+        noOfObjects++;      //count number of Counter objects that have been created (static variable)
     }
 
 //    Alt 2: a constructor for static variables - static initialisation block
@@ -28,7 +28,7 @@ public class Counter {
     }
 
     public void printCounterObjects() {
-        System.out.println(counterObjects);
+        System.out.println(noOfObjects);
     }
 
     public static void main(String[] args) {

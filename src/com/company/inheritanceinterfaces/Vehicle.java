@@ -13,6 +13,15 @@ abstract public class Vehicle {
         System.out.println("Färdas till " + destination);
     }
 
+    public String color() {
+        return color;
+    }
+
+
+    public void color(String color) {
+        this.color = color;
+    }
+
     public static void main(String[] args) {
         Vehicle boat = new Boat("sky-blue");
         Vehicle sail = new Sail("white");
@@ -25,7 +34,38 @@ abstract public class Vehicle {
         motorboat.goTo("Sicily");
         bicycle.goTo("Delsjön");
         car.goTo("Stockholm");
+
+//        instanceof -> Type casting a super class to a subclass type       ((Car)car).burnOut(10);
+
+        castInstanceOf(car);
+        castInstanceOf(bicycle);
+        castInstanceOf(motorboat);
+        castInstanceOf(sail);
     }
+
+    static void castInstanceOf(Vehicle vehicle) {
+//        if (vehicle instanceof Car)
+//            ((Car) vehicle).burnOut(10);
+        if (vehicle instanceof Car car)     //clean code -> pattern matching for 'instanceof'
+            car.burnOut(10);                //variable car is only available within if block
+        else if(vehicle instanceof Bicycle bicycle)
+            bicycle.ringBell();
+        else if(vehicle instanceof Boat boat)
+            boat.startBoat();
+        else if (vehicle instanceof  Motorboat motorboat)
+            motorboat.startEngine();
+        else if(vehicle instanceof Sail sail)
+            sail.sailing();
+    }
+
+
+
+//    pattern matching in switch - JDK 17
+//    static void switchInstanceOf(Vehicle vehicle) {
+//        switch (vehicle) {
+//            case Car car -> car.burnOut(10);
+//        }
+//    }
 
 }
 
@@ -41,9 +81,13 @@ class Boat extends Vehicle {
     public void goTo(String destination) {
         System.out.println("Färdas med båt till " + destination);
     }
+
+    public void startBoat() {
+        System.out.println("Vroom... boat starting!");
+    }
 }
 
-class Motorboat extends Boat {
+class Motorboat extends Vehicle {
     public Motorboat() {
     }
 
@@ -55,9 +99,13 @@ class Motorboat extends Boat {
     public void goTo(String destination) {
         System.out.println("Färdas med motorbåt till " + destination);
     }
+
+    public void startEngine() {
+        System.out.println("starting motorboat...");
+    }
 }
 
-class Sail extends Boat {
+class Sail extends Vehicle {
     public Sail() {}
 
     public Sail(String color) {
@@ -67,6 +115,10 @@ class Sail extends Boat {
     @Override
     public void goTo(String destination) {
         System.out.println("Färdas med segelbåt till " + destination);
+    }
+
+    public void sailing() {
+        System.out.println("Sailing in the sun!");
     }
 }
 
@@ -89,6 +141,10 @@ class Bicycle extends Vehicle {
     public void goTo(String destination) {
         System.out.println("Färdas med cykel till " + destination);
     }
+
+    public void ringBell() {
+        System.out.println("Ring ring");
+    }
 }
 
 class Car extends Vehicle {
@@ -102,6 +158,11 @@ class Car extends Vehicle {
     public void goTo(String destination) {
         System.out.println("Färdas med bil till " + destination);
     }
+
+    public void burnOut(int seconds){
+        System.out.println("Spinning the wheels for " + seconds + " seconds.");
+    }
+
 }
 
 abstract class ElectricVehicle {

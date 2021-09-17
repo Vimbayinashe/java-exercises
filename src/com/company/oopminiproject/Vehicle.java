@@ -2,7 +2,7 @@ package com.company.oopminiproject;
 
 import java.util.Random;
 
-abstract public class Vehicle {
+public abstract class Vehicle {
     private int weight;
     private int price;
     private Person owner;
@@ -37,14 +37,15 @@ abstract public class Vehicle {
 
     @Override
     public String toString() {
-        return "Vehicle{" +
+        return this.getClass().getSimpleName() + " {" +
                 "weight=" + weight +
                 ", price=" + price +
+                ", owner=" + owner +
                 '}';
     }
 
-    public void removeOwner() {
-        this.owner = null;
+    public Person getOwner() {
+        return owner;
     }
 
     public void addOwner(Person owner) {    //changeOwner
@@ -55,7 +56,7 @@ abstract public class Vehicle {
 
 
 // Vehicle derived classes
-class RoadVehicle extends Vehicle implements Driving {
+class RoadVehicle extends Vehicle {
     private int mileage;
 
 
@@ -69,7 +70,6 @@ class RoadVehicle extends Vehicle implements Driving {
         this.mileage = mileage;
     }
 
-    @Override
     public void drive(int km) {
         mileage += km;
     }
@@ -86,42 +86,66 @@ class RoadVehicle extends Vehicle implements Driving {
 }
 
 
-class WaterVessel extends Vehicle implements GPS {
-    private double latitude;
-    private double longitude;
-    Random random;
+class WaterVessel extends Vehicle {
+    private GpsPosition gps;    //better to create own data type / Class for info represented by to data points eg.
+                                // (x, y) co-ordinates
 
     public WaterVessel(int weight, int price) {
         super(weight, price);
-        random = new Random();
-
-        //default GPS co-ordinates for Gothenburg
-        latitude = 57.7072326;
-        longitude = 11.9670171;
+        gps = new GpsPosition();
     }
 
     public WaterVessel(int weight, int price, Person person) {
         super(weight, price, person);
-        random = new Random();
+    }
+
+    public void go() {
+       gps.updatePosition();
+    }
+
+    //GpsPosition's updatePosition method is public -> giving someone the reference to our actual gps position means
+    // they can also update and change that position. Create and five a copy of actual object (same data but diff ref)
+    public GpsPosition gps() {
+        return new GpsPosition(gps);
+    }
+
+}
+
+class GpsPosition {
+    private double latitude;
+    private double longitude;
+    private final Random random;
+
+    public GpsPosition() {
+        //default GPS co-ordinates for Gothenburg
         latitude = 57.7072326;
         longitude = 11.9670171;
+        random = new Random();
     }
 
-    public WaterVessel(int weight, int price, Person person, double latitude, double longitude) {
-        super(weight, price, person);
-        this.latitude = latitude;
-        this.longitude = longitude;
+    //copy constructor (deliberately chose to re-implement new Random() )
+    public GpsPosition(GpsPosition original) {
+        this();                                 //run default constructor
+        this.latitude = original.latitude;      //update with original's co-ordinates
+        this.longitude = original.longitude;
     }
 
-    @Override
-    public void go() {
-        latitude += random.nextDouble() * 171 - 85 ;  //latitude range: -85.05112878 to 85.05112878 (rounded to 85)
+    public void updatePosition() {
+        latitude += random.nextDouble() * 180 - 90 ;  //latitude range: -85.05112878 to 85.05112878 (rounded to 85)
         longitude += random.nextDouble() * 360 - 180;    //longitude range: -180 and 180
+    }
+
+    public double latitude() {
+        return latitude;
+    }
+
+    public double longitude() {
+        return longitude;
     }
 }
 
 
-class Aircraft extends Vehicle implements Flying {
+class Aircraft extends Vehicle {
     private int altitude;
     private final Random random;
 
@@ -137,13 +161,15 @@ class Aircraft extends Vehicle implements Flying {
         random = new Random();
     }
 
-    @Override
     public void fly(boolean isFlying) {
         if(isFlying)
             altitude = random.nextInt(15000);
         else
             altitude = 0;
     }
+
+    //better to have two separate methods: a method that handles true isFlying and a method without parameter for
+    // landing
 
     public int altitude() {
         return altitude;
@@ -184,9 +210,6 @@ class Boat extends WaterVessel {
         super(weight, price, person);
     }
 
-    public Boat(int weight, int price, Person person, double latitude, double longitude) {
-        super(weight, price, person, latitude, longitude);
-    }
 }
 
 class Airplane extends Aircraft {
