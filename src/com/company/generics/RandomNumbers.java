@@ -1,5 +1,7 @@
 package com.company.generics;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RandomNumbers {
@@ -14,6 +16,7 @@ public class RandomNumbers {
     }
 
 
+    //imperative foreach
     public void printValues() {
         for(double item : list) {
             System.out.println(item);
@@ -26,5 +29,21 @@ public class RandomNumbers {
 
         rand.printValues();
     }
+
+}
+
+class RandomDoubleValues {
+    public static void main(String[] args) {
+        List<Double> numbers = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            numbers.add(Math.random() * 100);
+        }
+
+        //inbuilt foreach - declarative
+        numbers.forEach((v )-> System.out.printf("%.2f%n", v));     //%.2f - 2 float points, %n - /n newline
+        numbers.forEach(System.out::println);
+    }
+
 
 }
