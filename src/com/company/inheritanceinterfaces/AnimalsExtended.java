@@ -1,5 +1,7 @@
 package com.company.inheritanceinterfaces;
 
+import com.company.inheritanceinterfaces.animals.NoiseMaker;
+
 public class AnimalsExtended {
 
 }
@@ -12,14 +14,6 @@ class Bird extends Animal implements NoiseMaker {
     }
 }
 
-class Reptile extends Animal implements NoiseMaker {
-
-    @Override
-    public String makeNoise() {
-        return "Ssss";
-    }
-}
-
 class Mammal extends Animal {
 
 }
@@ -28,11 +22,3 @@ class Dinosaur extends Animal {
 
 }
 
-class Robot implements NoiseMaker {
-
-    @Override
-    public String makeNoise() {
-        return "whirring";
-    }
-
-}
