@@ -1,27 +1,29 @@
 package com.company.generics;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Safe <T> {
     private T storedObject;
-//    List<T> safe = new ArrayList<>();
 
-    public Safe() {
-
-    }
-
-    void store(T object) {
+    void store(@NotNull T object) {
+        if(this.storedObject != null)
+            throw new IllegalStateException("An object has already been stored.");
+//        if (object == null)       //this check replaced by @NotNull annotation
+//            throw new IllegalArgumentException("Cannot store null");
         storedObject = object;
-//        safe.add(object);
     }
 
     T retrieve() {
-        T storedObject = this.storedObject;
+        if(this.storedObject == null)
+            throw new IllegalStateException("Nothing to retrieve, the safe is empty");
+        T temp = this.storedObject;
         this.storedObject = null;
-        return storedObject;
-        //return safe.remove(0);
+        return temp;
     }
+
 
     public static void main(String[] args) {
         Safe<String> safe = new Safe<String>();
