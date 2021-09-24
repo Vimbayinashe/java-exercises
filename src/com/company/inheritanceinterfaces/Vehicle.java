@@ -69,6 +69,7 @@ abstract public class Vehicle {
 
 }
 
+//Waterbased
 class Boat extends Vehicle {
     public Boat() {
     }

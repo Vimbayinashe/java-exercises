@@ -56,7 +56,7 @@ public abstract class Vehicle {
 
 
 // Vehicle derived classes
-class RoadVehicle extends Vehicle {
+public class RoadVehicle extends Vehicle {
     private int mileage;
 
 
@@ -145,7 +145,7 @@ class GpsPosition {
 }
 
 
-class Aircraft extends Vehicle {
+public class Aircraft extends Vehicle {
     private int altitude;
     private final Random random;
 
