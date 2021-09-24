@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Safe <T> {
-    T storedObject;
+    private T storedObject;
 //    List<T> safe = new ArrayList<>();
 
     public Safe() {
