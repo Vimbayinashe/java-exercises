@@ -1,13 +1,11 @@
 package com.company.generics;
 
-import javax.swing.plaf.IconUIResource;
-
 public class MyStack<T> {
-    private Node<T> head;
+    private DNode<T> head;
     private int counter;
 
     public void push(T obj) {
-        Node<T> node = new Node<>();
+        DNode<T> node = new DNode<>();
         node.data = obj;
 
         if(head != null) {
@@ -37,5 +35,5 @@ public class MyStack<T> {
 
 class Node<T> {
     T data;
-    Node<T> next;
+    DNode<T> next;
 }
