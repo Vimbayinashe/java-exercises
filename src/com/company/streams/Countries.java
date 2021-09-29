@@ -2,6 +2,7 @@ package com.company.streams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Countries {
 
@@ -34,27 +35,32 @@ public class Countries {
         countries.add(new Country("Liechtenstein", "Vaduz", 0.038, 160));
 
     }
-    
-    public String firstCountry() {
+
+    public Optional<String> firstCountry() {
         return countries.stream()
                 .map(Country::name)
-                .findFirst()
+                .findFirst();
                 // stop here if Optional<Country> is a sufficient return type
-                .orElse("No countries found.");
+//                .orElse("No countries found.");
     }
 
-    public String lastCountry() {
+    public Optional<String> lastCountry() {
         return countries.stream()
                 .map(Country::name)
-                .reduce((country1, country2) -> country2)
-                .orElse("No countries found.");
+                .reduce((country1, country2) -> country2);
+//                .orElse("No countries found.");
     }
+
+    //Skriv ut namnen på alla länder i listan, sorterade efter befolkning,
+    // med den högsta befolkningen först.
+    
 
     public static void main(String[] args) {
         Countries countries = new Countries();
 
-        System.out.println(countries.firstCountry());
-        System.out.println(countries.lastCountry());
+        countries.firstCountry().ifPresent(System.out::println);
+        countries.lastCountry().ifPresent(System.out::println);
+//        System.out.println(countries.lastCountry());
 
     }
 }
