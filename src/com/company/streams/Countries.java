@@ -3,10 +3,16 @@ package com.company.streams;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountryDemo {
+public class Countries {
 
-    public static void main(String[] args) {
-        List<Country> countries = new ArrayList<>();
+    private List<Country> countries;
+
+    public Countries() {
+        countries = new ArrayList<>();
+        addCountries();
+    }
+
+    public void addCountries() {
 
         countries.add(new Country("Sverige", "Stockholm", 10.07, 450295));
         countries.add(new Country("Norge", "Oslo", 5.27, 323802));
@@ -28,4 +34,29 @@ public class CountryDemo {
         countries.add(new Country("Liechtenstein", "Vaduz", 0.038, 160));
 
     }
+    
+    public String firstCountry() {
+        return countries.stream()
+                .map(Country::name)
+                .findFirst()
+                // stop here if Optional<Country> is a sufficient return type
+                .orElse("No countries found.");
+    }
+
+    public String lastCountry() {
+        return countries.stream()
+                .map(Country::name)
+                .reduce((country1, country2) -> country2)
+                .orElse("No countries found.");
+    }
+
+    public static void main(String[] args) {
+        Countries countries = new Countries();
+
+        System.out.println(countries.firstCountry());
+        System.out.println(countries.lastCountry());
+
+    }
 }
+
+
