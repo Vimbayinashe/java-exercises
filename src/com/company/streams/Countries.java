@@ -1,6 +1,7 @@
 package com.company.streams;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,14 +54,23 @@ public class Countries {
 
     //Skriv ut namnen på alla länder i listan, sorterade efter befolkning,
     // med den högsta befolkningen först.
-    
+    public List<String> countryNamesSortedByPopulation() {
+        return countries.stream()
+                .sorted(Comparator.comparing(Country::population).reversed())
+                .map(Country::name)
+                .toList();
+    }
+
 
     public static void main(String[] args) {
         Countries countries = new Countries();
 
+        System.out.print("First country: ");
         countries.firstCountry().ifPresent(System.out::println);
+        System.out.print("\nLast country: ");
         countries.lastCountry().ifPresent(System.out::println);
-//        System.out.println(countries.lastCountry());
+        System.out.println("\nSorted countries from greatest to least: ");
+        countries.countryNamesSortedByPopulation().forEach( country -> System.out.printf("%s, ", country));
 
     }
 }
