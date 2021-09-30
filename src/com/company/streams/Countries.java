@@ -104,6 +104,15 @@ public class Countries {
                 .toList();
     }
 
+    public List<String> leastPopulation() {
+        return countries.stream()
+                .sorted(Comparator.comparingDouble(Country::populationInteger))
+                .limit(5)
+                .map(Country::name)
+                .toList();
+    }
+
+
     public static void main(String[] args) {
         Countries countries = new Countries();
 
@@ -132,6 +141,8 @@ public class Countries {
         System.out.println("\nCountries whose name is longer than the capital city");
         countries.countryNameLongerThanCapital().forEach(System.out::println);
 
+        System.out.println("\nFive countries with least population");
+        countries.leastPopulation().forEach(System.out::println);
 
     }
 }
