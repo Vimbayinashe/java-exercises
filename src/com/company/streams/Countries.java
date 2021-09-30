@@ -140,7 +140,7 @@ public class Countries {
 
 //    public Map<Integer, List<String >> numberOfCountriesWithXPopulation() {
 //        return countries.stream()
-//                .collect(Collectors.groupingBy(country -> (int) country.population(), Collectors.toList()));
+//                .collect(Collectors.groupingBy(Country::populationInteger));
 //    }
 
     public List<String> countriesWithPopulationX(int population) {
@@ -148,6 +148,18 @@ public class Countries {
                 .filter(country -> population < country.population() && country.population() <= (population + 1))
                 .sorted(Comparator.comparing(Country::name))
                 .map(Country::name)
+                .toList();
+    }
+
+    public List<String> nameAndPopulation() {
+        return countries.stream()
+                .map(country -> country.name() + " - " + country.populationInteger())
+                .toList();
+    }
+
+    public List<String> nameAndPopulationDensity() {
+        return countries.stream()
+                .map(country -> country.name() + " - " + country.population() * 1000000 / country.area())
                 .toList();
     }
 
@@ -194,6 +206,15 @@ public class Countries {
 
         System.out.println("\n\nCountries with X population:");
         countries.countriesWithPopulationX(10).forEach(System.out::println);
+
+        System.out.println("\nCountry names and population");
+        countries.nameAndPopulation().forEach(System.out::println);
+
+        System.out.println("\nCountry names and population density");
+        countries.nameAndPopulationDensity().forEach(System.out::println);
+
+
+
     }
 }
 
