@@ -90,10 +90,16 @@ public class Countries {
                 .count();
     }
 
-    //9 alla länder vars huvudstad börjar på samma bokstav som landets namn.
     public List<String> capitalAndCountryBeginWithSameLetter() {
         return countries.stream()
                 .filter(country -> country.name().startsWith(country.capitalCity().substring(0, 1)))
+                .map(Country::name)
+                .toList();
+    }
+
+    public List<String> countryNameLongerThanCapital() {
+        return countries.stream()
+                .filter(country -> country.name().length() > country.capitalCity().length())
                 .map(Country::name)
                 .toList();
     }
@@ -122,6 +128,10 @@ public class Countries {
 
         System.out.println("\nCountries whose name starts with the same letter as capital city");
         countries.capitalAndCountryBeginWithSameLetter().forEach(System.out::println);
+
+        System.out.println("\nCountries whose name is longer than the capital city");
+        countries.countryNameLongerThanCapital().forEach(System.out::println);
+
 
     }
 }
