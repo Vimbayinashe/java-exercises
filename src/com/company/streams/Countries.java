@@ -64,7 +64,6 @@ public class Countries {
                 .max(Comparator.comparing(Country::population));
     }
 
-    //6 Skriv ut genomsnittsarean och hur många länder som har en mindre area än genomsnittet.
     public double averageArea() {
         return countries.stream()
                 .mapToDouble(Country::area)
@@ -76,6 +75,13 @@ public class Countries {
         return countries.stream()
                 .filter(country -> country.area() < averageArea())
                 .count();
+    }
+
+    public List<String> populationLessThan(int size) {
+        return countries.stream()
+                .filter(country -> country.populationInteger() < size)
+                .map(Country::name)
+                .toList();
     }
 
 
@@ -92,6 +98,10 @@ public class Countries {
         countries.countryWithGreatestPopulation().ifPresent(country -> System.out.println(country.populationInteger()));
         System.out.printf("\nAverage area is %.2f sq meters.",countries.averageArea());
         System.out.printf("\n\n%s countries with an area less than average.", countries.areaLessThanAverage());
+
+        int comparisonPopulation = 5_000_000;
+        System.out.println("\n\nCountries with population less than " + comparisonPopulation);
+        countries.populationLessThan(comparisonPopulation).forEach(System.out::println);
 
     }
 }
