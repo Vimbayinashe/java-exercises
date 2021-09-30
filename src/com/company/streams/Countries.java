@@ -90,6 +90,13 @@ public class Countries {
                 .count();
     }
 
+    //9 alla länder vars huvudstad börjar på samma bokstav som landets namn.
+    public List<String> capitalAndCountryBeginWithSameLetter() {
+        return countries.stream()
+                .filter(country -> country.name().startsWith(country.capitalCity().substring(0, 1)))
+                .map(Country::name)
+                .toList();
+    }
 
     public static void main(String[] args) {
         Countries countries = new Countries();
@@ -112,6 +119,9 @@ public class Countries {
         System.out.println("\n" + countries.areaGreaterThan(10_000) + " countries with area over 10.000");
         System.out.println(countries.areaGreaterThan(100_000) + " countries with area over 100.000");
         System.out.println(countries.areaGreaterThan(1_000_000) + " countries with area over 1.000.000");
+
+        System.out.println("\nCountries whose name starts with the same letter as capital city");
+        countries.capitalAndCountryBeginWithSameLetter().forEach(System.out::println);
 
     }
 }
