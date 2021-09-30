@@ -59,11 +59,23 @@ public class Countries {
                 .toList();
     }
 
-    //5 Skriv ut vilken den största befolkningsmängden är.
-
     public Optional<Country> countryWithGreatestPopulation() {
         return countries.stream()
                 .max(Comparator.comparing(Country::population));
+    }
+
+    //6 Skriv ut genomsnittsarean och hur många länder som har en mindre area än genomsnittet.
+    public double averageArea() {
+        return countries.stream()
+                .mapToDouble(Country::area)
+                .average()
+                .orElse(0.0);
+    }
+
+    public long areaLessThanAverage() {
+        return countries.stream()
+                .filter(country -> country.area() < averageArea())
+                .count();
     }
 
 
@@ -78,6 +90,8 @@ public class Countries {
         countries.countryNamesSortedByPopulation().forEach( country -> System.out.printf("%s, ", country));
         System.out.println("\n\nGreatest population");
         countries.countryWithGreatestPopulation().ifPresent(country -> System.out.println(country.populationInteger()));
+        System.out.printf("\nAverage area is %.2f sq meters.",countries.averageArea());
+        System.out.printf("\n\n%s countries with an area less than average.", countries.areaLessThanAverage());
 
     }
 }
