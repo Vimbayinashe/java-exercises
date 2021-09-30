@@ -52,13 +52,18 @@ public class Countries {
 //                .orElse("No countries found.");
     }
 
-    //Skriv ut namnen på alla länder i listan, sorterade efter befolkning,
-    // med den högsta befolkningen först.
     public List<String> countryNamesSortedByPopulation() {
         return countries.stream()
                 .sorted(Comparator.comparing(Country::population).reversed())
                 .map(Country::name)
                 .toList();
+    }
+
+    //5 Skriv ut vilken den största befolkningsmängden är.
+
+    public Optional<Country> countryWithGreatestPopulation() {
+        return countries.stream()
+                .max(Comparator.comparing(Country::population));
     }
 
 
@@ -71,6 +76,8 @@ public class Countries {
         countries.lastCountry().ifPresent(System.out::println);
         System.out.println("\nSorted countries from greatest to least: ");
         countries.countryNamesSortedByPopulation().forEach( country -> System.out.printf("%s, ", country));
+        System.out.println("\n\nGreatest population");
+        countries.countryWithGreatestPopulation().ifPresent(country -> System.out.println(country.populationInteger()));
 
     }
 }
