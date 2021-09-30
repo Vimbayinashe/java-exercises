@@ -1,5 +1,7 @@
 package com.company.streams;
 
+import org.w3c.dom.xpath.XPathResult;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -116,8 +118,18 @@ public class Countries {
         return countries.stream()
                 .filter(country -> country.populationInteger() > 7_000_000)
                 .sorted(Comparator.comparingDouble(Country::population))
-                .limit(3)
                 .map(Country::name)
+                .limit(3)
+                .toList();
+    }
+
+
+    public List<String> threeCountriesReverseOrderWithAreaGreaterThan(int area) {
+        return countries.stream()
+                .filter(country -> country.area() >= area)
+                .sorted(Comparator.comparing(Country::name).reversed())
+                .map(Country::name)
+                .limit(3)
                 .toList();
     }
 
@@ -155,6 +167,10 @@ public class Countries {
 
         System.out.println("\nThree countries with least population above 7,000,000");
         countries.leastPopulationAndOverSevenMillion().forEach(System.out::println);
+
+        System.out.println("\nTop three countries with an minimum area of 500,000");
+        countries.threeCountriesReverseOrderWithAreaGreaterThan(500_000).forEach(System.out::println);
+
 
     }
 }
