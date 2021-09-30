@@ -24,7 +24,7 @@ public final class Country {
     }
 
     public double population() {
-        return population * 1e+6;
+        return population;
     }
 
     public int populationInteger() {

@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class Countries {
 
-    private List<Country> countries;
+    private final List<Country> countries;
 
     public Countries() {
         countries = new ArrayList<>();
@@ -112,6 +112,15 @@ public class Countries {
                 .toList();
     }
 
+    public List<String> leastPopulationAndOverSevenMillion() {
+        return countries.stream()
+                .filter(country -> country.populationInteger() > 7_000_000)
+                .sorted(Comparator.comparingDouble(Country::population))
+                .limit(3)
+                .map(Country::name)
+                .toList();
+    }
+
 
     public static void main(String[] args) {
         Countries countries = new Countries();
@@ -143,6 +152,9 @@ public class Countries {
 
         System.out.println("\nFive countries with least population");
         countries.leastPopulation().forEach(System.out::println);
+
+        System.out.println("\nThree countries with least population above 7,000,000");
+        countries.leastPopulationAndOverSevenMillion().forEach(System.out::println);
 
     }
 }
