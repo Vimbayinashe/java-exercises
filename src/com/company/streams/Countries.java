@@ -138,6 +138,19 @@ public class Countries {
                 .collect(Collectors.groupingBy(country -> country.name().substring(0, 1), Collectors.counting()));
     }
 
+//    public Map<Integer, List<String >> numberOfCountriesWithXPopulation() {
+//        return countries.stream()
+//                .collect(Collectors.groupingBy(country -> (int) country.population(), Collectors.toList()));
+//    }
+
+    public List<String> countriesWithPopulationX(int population) {
+        return countries.stream()
+                .filter(country -> population < country.population() && country.population() <= (population + 1))
+                .sorted(Comparator.comparing(Country::name))
+                .map(Country::name)
+                .toList();
+    }
+
 
     public static void main(String[] args) {
         Countries countries = new Countries();
@@ -179,6 +192,8 @@ public class Countries {
         countries.numberOfCountriesStartingWithSameLetter()
                 .forEach((letter, count) -> System.out.print(letter + ": " + count + ", "));
 
+        System.out.println("\n\nCountries with X population:");
+        countries.countriesWithPopulationX(10).forEach(System.out::println);
     }
 }
 
