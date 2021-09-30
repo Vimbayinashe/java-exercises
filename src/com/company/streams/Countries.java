@@ -1,20 +1,31 @@
 package com.company.streams;
 
-import org.w3c.dom.xpath.XPathResult;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Countries {
 
+    //Important change
+    // create countries in main()
+    //send countries as an argument into all methods
+
     private final List<Country> countries;
 
     public Countries() {
-        countries = new ArrayList<>();
-        addCountries();
+        countries = getCountries();
     }
 
-    public void addCountries() {
+    public List<Country> getCountries() {
+
+        /* Alternative: make an unmodifiable List
+
+         *   return  List.of(
+         *      new Country( new Country("Sverige", "Stockholm", 10.07, 450295))
+         *      new Country( new Country("Sverige", "Stockholm", 10.07, 450295)) ...and so on
+         *
+          */
+
+        List<Country> countries = new ArrayList<>();
 
         countries.add(new Country("Sverige", "Stockholm", 10.07, 450295));
         countries.add(new Country("Norge", "Oslo", 5.27, 323802));
@@ -35,6 +46,7 @@ public class Countries {
         countries.add(new Country("Luxemburg", "Luxemburg", 0.58, 2586));
         countries.add(new Country("Liechtenstein", "Vaduz", 0.038, 160));
 
+        return countries;
     }
 
     public Optional<String> firstCountry() {
@@ -47,10 +59,24 @@ public class Countries {
 
     public Optional<String> lastCountry() {
         return countries.stream()
-                .map(Country::name)
-                .reduce((country1, country2) -> country2);
+                .reduce((first, second) -> second)
+                .map(Country::name);
 //                .orElse("No countries found.");
+        //reduce first -> it's easier to work with object references than converting Country Object to a String
     }
+
+//    record Pair(Optional<String> first, Optional<String> last) {}     ->  temp record to store and return data pairs
+
+    public  List<String> countryNamesAlphabeticalOrder() {
+        return countries.stream()
+                .map(Country::name)
+                .sorted()
+                .toList();
+    }
+
+    //map first -> sort => String has an implemented sort function
+    //Alternatives sort methods: .sorted(Comparator.naturalOrder()) .sorted(Comparator.reversedOrder())
+
 
     public List<String> countryNamesSortedByPopulation() {
         return countries.stream()
@@ -58,6 +84,8 @@ public class Countries {
                 .map(Country::name)
                 .toList();
     }
+
+    //.sorted(Comparator.comparing(Country::population).thenComparing(Country::area))   //sort by population and then by area
 
     public Optional<Country> countryWithGreatestPopulation() {
         return countries.stream()
