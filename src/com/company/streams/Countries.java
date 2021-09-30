@@ -2,10 +2,8 @@ package com.company.streams;
 
 import org.w3c.dom.xpath.XPathResult;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Countries {
 
@@ -133,6 +131,13 @@ public class Countries {
                 .toList();
     }
 
+    //14 Skriv ut hur många länder det finns som börjar på varje bokstav som finns i listan.
+    // Exempelvis så finns det två länder vars namn börjar på S, ett som börjar på D och två som börjar på F.
+    public Map<String, Long> numberOfCountriesStartingWithSameLetter() {
+        return countries.stream()
+                .collect(Collectors.groupingBy(country -> country.name().substring(0, 1), Collectors.counting()));
+    }
+
 
     public static void main(String[] args) {
         Countries countries = new Countries();
@@ -171,6 +176,8 @@ public class Countries {
         System.out.println("\nTop three countries with an minimum area of 500,000");
         countries.threeCountriesReverseOrderWithAreaGreaterThan(500_000).forEach(System.out::println);
 
+        countries.numberOfCountriesStartingWithSameLetter()
+                .forEach((letter, count) -> System.out.print(letter + ": " + count + ", "));
 
     }
 }
