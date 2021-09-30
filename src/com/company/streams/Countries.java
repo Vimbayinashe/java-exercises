@@ -84,6 +84,12 @@ public class Countries {
                 .toList();
     }
 
+    public long areaGreaterThan(int area) {
+        return countries.stream()
+                .filter(country -> country.area() > area)
+                .count();
+    }
+
 
     public static void main(String[] args) {
         Countries countries = new Countries();
@@ -102,6 +108,10 @@ public class Countries {
         int comparisonPopulation = 5_000_000;
         System.out.println("\n\nCountries with population less than " + comparisonPopulation);
         countries.populationLessThan(comparisonPopulation).forEach(System.out::println);
+
+        System.out.println("\n" + countries.areaGreaterThan(10_000) + " countries with area over 10.000");
+        System.out.println(countries.areaGreaterThan(100_000) + " countries with area over 100.000");
+        System.out.println(countries.areaGreaterThan(1_000_000) + " countries with area over 1.000.000");
 
     }
 }
