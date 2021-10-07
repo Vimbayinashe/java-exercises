@@ -213,7 +213,7 @@ public class Countries {
     }
 
     //create a new record type to represent two data types
-    record CountryAndPop(String name, Integer popuation) {}
+    record CountryAndPop(String name, Integer population) {}
 
     public List<CountryAndPop> nameAndPopulation2() {
         return countries.stream()
@@ -226,6 +226,7 @@ public class Countries {
                 .map(country -> country.name() + " - " + country.population() * 1000000 / country.area())
                 .toList();
     }
+
 
     //redo with a unique record type
     record CountryAndPopDensity(String name, Double popDensity) {}
@@ -248,6 +249,35 @@ public class Countries {
     @NotNull
     private String  getReverse(Country country) {
         return new StringBuilder(country.capitalCity()).reverse().toString();
+    }
+
+    private void task18() {
+        double popSixLeastCountries = countries.stream()
+                .mapToDouble(Country::population)
+                .sorted()
+                .limit(6)
+                .sum();
+
+        double popThreeLargestCountries = countries.stream()
+                .sorted(Comparator.comparing(Country::population).reversed())
+                .limit(3)
+                .mapToDouble(Country::population)
+                .sum();
+
+        //Alt 2: for the above
+        double popThreeLargestCountries2 = countries.stream()
+                .map(Country::population)
+                .sorted(Collections.reverseOrder())
+                .limit(3)
+                .mapToDouble(c -> c)
+                .sum();
+    }
+
+    public double task19() {
+        return countries.stream()
+                .filter(country -> country.name().length() == 7)
+                .mapToDouble(Country::populationInteger)
+                .sum();
     }
 
 
