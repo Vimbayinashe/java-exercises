@@ -1,5 +1,7 @@
 package com.company.streams;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -90,6 +92,12 @@ public class Countries {
     public Optional<Country> countryWithGreatestPopulation() {
         return countries.stream()
                 .max(Comparator.comparing(Country::population));
+
+        //Alt 2:
+        /*return countries.stream()
+                .mapToDouble(Country::population)       //mapToDouble -> we can use regular double methods
+                .max();
+         */
     }
 
     public double averageArea() {
@@ -97,13 +105,19 @@ public class Countries {
                 .mapToDouble(Country::area)
                 .average()
                 .orElse(0.0);
+
     }
 
     public long areaLessThanAverage() {
+        double averageAreaValue = averageArea();
+
         return countries.stream()
-                .filter(country -> country.area() < averageArea())
+                .filter(country -> country.area() < averageAreaValue)       //**
                 .count();
     }
+
+    //** it is much better to create averageAreaValue once in the method than to call averageArea() in the returned
+    // stream => this causes the method to be called for each cycle of the loop (n.size() times)
 
     public List<String> populationLessThan(int size) {
         return countries.stream()
@@ -118,12 +132,25 @@ public class Countries {
                 .count();
     }
 
-    public List<String> capitalAndCountryBeginWithSameLetter() {
+//    public void areaGreaterThanUsingGroupBy() {
+//        countries.stream()
+//                .collect(Collectors.groupingBy())
+//    }
+
+    public List<CountryNameAndCapital> capitalAndCountryBeginWithSameLetter() {
         return countries.stream()
-                .filter(country -> country.name().startsWith(country.capitalCity().substring(0, 1)))
-                .map(Country::name)
+                .filter(Countries::compareFirstLetters)     //method reference
+                .map(country -> new CountryNameAndCapital(country.name(), country.capitalCity()))
                 .toList();
     }
+
+    record CountryNameAndCapital(String country, String capital) {}
+
+    private static boolean compareFirstLetters(Country country) {
+        return country.name().startsWith(country.capitalCity().substring(0, 1));
+    }
+
+    //Alt 2:     .filter(country -> country.name().startsWith(String.valueOf(country.capitalCity().charAt(0))))
 
     public List<String> countryNameLongerThanCapital() {
         return countries.stream()
@@ -142,7 +169,7 @@ public class Countries {
 
     public List<String> leastPopulationAndOverSevenMillion() {
         return countries.stream()
-                .filter(country -> country.populationInteger() > 7_000_000)
+                .filter(country -> country.population() > 7.0)
                 .sorted(Comparator.comparingDouble(Country::population))
                 .map(Country::name)
                 .limit(3)
@@ -185,10 +212,42 @@ public class Countries {
                 .toList();
     }
 
+    //create a new record type to represent two data types
+    record CountryAndPop(String name, Integer popuation) {}
+
+    public List<CountryAndPop> nameAndPopulation2() {
+        return countries.stream()
+                .map(country -> new CountryAndPop(country.name(), country.populationInteger() * 1_000_000))
+                .toList();
+    }
+
     public List<String> nameAndPopulationDensity() {
         return countries.stream()
                 .map(country -> country.name() + " - " + country.population() * 1000000 / country.area())
                 .toList();
+    }
+
+    //redo with a unique record type
+    record CountryAndPopDensity(String name, Double popDensity) {}
+
+    public List<CountryAndPopDensity> nameAndPopulationDensity2() {
+        return countries.stream()
+                .map(country -> new CountryAndPopDensity(country.name(), country.population() * 1000000 / country.area()))
+                .sorted(Comparator.comparing(CountryAndPopDensity::popDensity))
+                .toList();
+    }
+
+    private List<String> task17() {
+        return countries.stream()
+                //.sorted(Comparator.comparing(country -> getReverse(country)))
+                .sorted(Comparator.comparing(this::getReverse))
+                .map(Country::name)
+                .toList();
+    }
+
+    @NotNull
+    private String  getReverse(Country country) {
+        return new StringBuilder(country.capitalCity()).reverse().toString();
     }
 
 
@@ -241,6 +300,9 @@ public class Countries {
         System.out.println("\nCountry names and population density");
         countries.nameAndPopulationDensity().forEach(System.out::println);
 
+        countries.nameAndPopulation2().forEach(System.out::println);
+
+        countries.nameAndPopulationDensity2().forEach(System.out::println);
 
 
     }
