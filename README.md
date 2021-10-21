@@ -1,1 +1,1 @@
-A collection of exercises I have carried out whilst learning Java.
+A collection of school exercises I have carried out whilst learning Java.
